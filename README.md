@@ -1,5 +1,5 @@
 # golang-testing
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/:argally/:golang-testing)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/amandagalligan/golang-testing)
 
 
 Demonstrate some basic testing in Golang with github actions 
