@@ -1,7 +1,7 @@
 # golang-testing
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/amandagalligan/golang-testing)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/amandagalligan/golang-testing/go.yml)
-[![coverage](https://raw.githubusercontent.com/amandagalligan/golang-testing/refs/heads/badges/.badges/main/coverage.svg)](/.github/.testcoverage.yml)
+[![coverage](https://raw.githubusercontent.com/amandagalligan/golang-testing/badges/.badges/main/coverage.svg)](/.github/.testcoverage.yml)
 
 
 Demonstrate some basic testing in Golang with github actions 
