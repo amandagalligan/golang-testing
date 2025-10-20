@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"io"
 	"os"
 	"strings"
@@ -118,4 +119,17 @@ func Test_checkNumbers(t *testing.T) {
 		}
 
 	}
+}
+
+func Test_readuserInput(t *testing.T) {
+	// to test this function we need a channel and an instance of io.Reader
+	doneChan := make(chan bool)
+	// we'll create a reference to bytes.Buffer which satisfy Read Method requirement for io.Reader
+	var stdin bytes.Buffer
+	//simulate user typing 1 then return then q and return
+	stdin.Write([]byte("1\nq\n"))
+
+	go readUserInput(&stdin, doneChan)
+	<-doneChan
+	close(doneChan)
 }

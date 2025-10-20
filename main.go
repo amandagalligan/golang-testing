@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func main() {
+func main() { // coverage-ignore
 	// print a welcome message
 	intro()
 
