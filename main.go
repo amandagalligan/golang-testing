@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"strconv"
 	"strings"
@@ -15,8 +16,8 @@ func main() {
 	// create a channel to indicate when the user wants to quit
 	doneChan := make(chan bool)
 
-	// start a goroutine to read user input and run program
-	go readUserInput(doneChan)
+	// start a goroutine to read user input with os.Stdin explicitly passed in and run program
+	go readUserInput(os.Stdin, doneChan)
 
 	// block until the doneChan gets a value
 	<-doneChan
@@ -28,17 +29,25 @@ func main() {
 	fmt.Println("Goodbye.")
 }
 
-func readUserInput(doneChan chan bool) {
-	scanner := bufio.NewScanner(os.Stdin)
+// refactoring to pass in io.Reader which has Read method that satisfies the bufio.NewScanner
+// This decouples us from hard coded os.Stdin for testing of this function later.
+func readUserInput(in io.Reader, doneChan chan bool) {
+	scanner := bufio.NewScanner(in)
+
+	// **Exit Condition**: The `checkNumbers` function returns two values:
+	// a result message (`res`) and a boolean (`done`). If `done` is `true`,
+	// it means the user has entered "q" to quit.
+	// The goroutine then sends a `true` signal to the `doneChan` channel and exits the loop,
+	// effectively ending the goroutine.
 
 	for {
 		res, done := checkNumbers(scanner)
-
 		if done {
 			doneChan <- true
 			return
 		}
-
+		// **Output and Prompt**: If `done` is `false`, it prints the result message (`res`)
+		//  and prompts the user for more input.
 		fmt.Println(res)
 		prompt()
 	}
